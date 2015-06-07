@@ -29,7 +29,7 @@
     <platform name="android">
         <config-file target="config.xml" parent="/*">
             <feature name="CalGeolocation" >
-                <param name="android-package" value="com.collectme.cordova.CalGeolocation"/>
+                <param name="android-package" value="com.collectme.cordova.calgeolocation.CalGeolocation"/>
             </feature>
         </config-file>
 
