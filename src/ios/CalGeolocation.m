@@ -91,9 +91,9 @@
 {
 
     CLAuthorizationStatus authStatus = [CLLocationManager  authorizationStatus];
-    if(authStatus == kCLAuthorizationStatusAuthorizedAlways ||
-       authStatus == kCLAuthorizationStatusAuthorizedWhenInUse ||
-       authStatus == kCLAuthorizationStatusAuthorized) {
+    if((authStatus == kCLAuthorizationStatusAuthorizedAlways) ||
+       (authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) ||
+       (authStatus == kCLAuthorizationStatusAuthorized)) {
         NSLog(@"This app is authorized to use location.");
         return true;
     } else {
