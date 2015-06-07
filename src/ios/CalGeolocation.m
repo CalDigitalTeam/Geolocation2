@@ -5,7 +5,7 @@
 //  Copyright (c) 2012 AVANTIC ESTUDIO DE INGENIEROS
 //
 
-#import "Diagnostic.h"
+#import "CalGeolocation.h"
 #import <CoreLocation/CoreLocation.h>
 
 //#import <arpa/inet.h> // For AF_INET, etc.
