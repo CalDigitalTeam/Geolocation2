@@ -8,11 +8,11 @@
 #import "Diagnostic.h"
 #import <CoreLocation/CoreLocation.h>
 
-#import <arpa/inet.h> // For AF_INET, etc.
-#import <ifaddrs.h> // For getifaddrs()
-#import <net/if.h> // For IFF_LOOPBACK
+//#import <arpa/inet.h> // For AF_INET, etc.
+//#import <ifaddrs.h> // For getifaddrs()
+//#import <net/if.h> // For IFF_LOOPBACK
 
-@implementation Diagnostic
+@implementation CalGeolocation
 
 
 - (void) isLocationEnabled: (CDVInvokedUrlCommand*)command
@@ -90,7 +90,10 @@
 - (BOOL) isLocationAuthorized
 {
 
-    if([CLLocationManager  authorizationStatus] != kCLAuthorizationStatusDenied) {
+    CLAuthorizationStatus authStatus = [CLLocationManager  authorizationStatus];
+    if(authStatus == kCLAuthorizationStatusAuthorizedAlways ||
+       authStatus == kCLAuthorizationStatusAuthorizedWhenInUse ||
+       authStatus == kCLAuthorizationStatusAuthorized) {
         NSLog(@"This app is authorized to use location.");
         return true;
     } else {
@@ -101,92 +104,6 @@
 }
 
 
-- (void) isWifiEnabled: (CDVInvokedUrlCommand*)command
-{
-    NSLog(@"Loading WiFi status...");
-    CDVPluginResult* pluginResult;
-    if([self connectedToWifi]) {
-        
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:1];
-        
-    } else {
-        
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:0];
-    
-    }
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-
-}
-
-- (BOOL) connectedToWifi  // Don't work on iOS Simulator, only in the device
-{    
-    struct ifaddrs *addresses;
-    struct ifaddrs *cursor;
-    BOOL wiFiAvailable = NO;
-    
-    if (getifaddrs(&addresses) != 0) {
-        return NO;
-    }
-    
-    cursor = addresses;
-    
-    while (cursor != NULL)  {
-        if (cursor -> ifa_addr -> sa_family == AF_INET && !(cursor -> ifa_flags & IFF_LOOPBACK)) // Ignore the loopback address
-        {
-            // Check for WiFi adapter
-            
-            if (strcmp(cursor -> ifa_name, "en0") == 0) {
-                
-                NSLog(@"Wifi ON");
-                wiFiAvailable = YES;
-                break;
-                
-            }
-            
-        }
-        
-        cursor = cursor -> ifa_next;
-    }
-    
-    freeifaddrs(addresses);
-    return wiFiAvailable;
-}
-
-- (void) isCameraEnabled: (CDVInvokedUrlCommand*)command
-{
-    NSLog(@"Loading camera status...");
-    CDVPluginResult* pluginResult;
-    if([self isCameraEnabled]) {
-        
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:1];
-        
-    }
-    else {
-        
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:0];
-        
-    }
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    
-}
-
-
-- (BOOL) isCameraEnabled
-{
-
-    BOOL cameraAvailable = 
-    [UIImagePickerController 
-     isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    if(cameraAvailable) {
-        NSLog(@"Camera enabled");
-        return true;
-    }
-    else {
-        NSLog(@"Camera disabled");
-        return false;
-    }
-
-}
 
 
 

@@ -40,13 +40,13 @@ import android.location.LocationManager;
 import android.location.LocationListener;
 import android.net.wifi.WifiManager;
 
-public class Diagnostic extends CordovaPlugin {
-    public static final String TAG = "Diagnostic";
+public class CalGeolocation extends CordovaPlugin {
+    public static final String TAG = "CalGeolocation";
 
     /**
      * Constructor.
      */
-    public Diagnostic() {
+    public CalGeolocation() {
     }
 
     /**
@@ -78,14 +78,7 @@ public class Diagnostic extends CordovaPlugin {
             // r.put("success", isGpsEnabled());
             // r.put("success", isGpsEnabled() || isNetworkEnabled());
             callbackContext.success(isGpsEnabled() ? 1 : 0);
-        } else if(action.equals("isWifiEnabled")) {
-            // r.put("success", isWifiEnabled());
-            callbackContext.success(isWifiEnabled() ? 1 : 0);
-        } else if(action.equals("isCameraEnabled")) {
-            // r.put("success", isCameraEnabled());
-            callbackContext.success(isCameraEnabled() ? 1 : 0);
-        }
-        else {
+        } else {
             return false;
         }
         return true;
@@ -99,24 +92,6 @@ public class Diagnostic extends CordovaPlugin {
     public boolean isGpsEnabled() {
         boolean result = isLocationProviderEnabled(LocationManager.GPS_PROVIDER);
         Log.d(TAG, "GPS enabled: " + result);
-        return result;
-    }
-
-    public boolean isNetworkEnabled() {
-        boolean result = isLocationProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        Log.d(TAG, "Network enabled: " + result);
-        return result;
-    }
-
-    public boolean isWifiEnabled() {
-        WifiManager wifiManager = (WifiManager) this.cordova.getActivity().getSystemService(Context.WIFI_SERVICE);
-        boolean result = wifiManager.isWifiEnabled();
-        return result;
-    }
-
-    public boolean isCameraEnabled() {
-        PackageManager pm = this.cordova.getActivity().getPackageManager();
-        boolean result = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
         return result;
     }
 

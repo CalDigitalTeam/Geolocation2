@@ -6,7 +6,7 @@
 **/
 
 
-var Diagnostic = function() {
+var CalGeolocation = function() {
 };
 
 /**
@@ -18,10 +18,10 @@ var Diagnostic = function() {
  * 							This callback function have a string param with the error.
  */
 
-Diagnostic.prototype.isLocationEnabled = function(successCallback, errorCallback) {
+CalGeolocation.prototype.isLocationEnabled = function(successCallback, errorCallback) {
 	return cordova.exec(successCallback,
 						errorCallback,
-						'Diagnostic',
+						'CalGeolocation',
 						'isLocationEnabled',
 						[]);
 };
@@ -35,18 +35,18 @@ Diagnostic.prototype.isLocationEnabled = function(successCallback, errorCallback
  * 							This callback function have a string param with the error.
  */
 
-Diagnostic.prototype.isLocationEnabledSetting = function(successCallback, errorCallback) {
+CalGeolocation.prototype.isLocationEnabledSetting = function(successCallback, errorCallback) {
 	return cordova.exec(successCallback,
 						errorCallback,
-						'Diagnostic',
+						'CalGeolocation',
 						'isLocationEnabledSetting',
 						[]);
 };
 
-Diagnostic.prototype.switchToLocationSettings = function() {
+CalGeolocation.prototype.switchToLocationSettings = function() {
 	return cordova.exec(null,
 						null,
-						'Diagnostic',
+						'CalGeolocation',
 						'switchToLocationSettings',
 						[]);
 };
@@ -61,53 +61,14 @@ Diagnostic.prototype.switchToLocationSettings = function() {
  * 							This callback function have a string param with the error.
  */
 
-Diagnostic.prototype.isLocationAuthorized = function(successCallback, errorCallback) {
+CalGeolocation.prototype.isLocationAuthorized = function(successCallback, errorCallback) {
 	return cordova.exec(successCallback,
 						errorCallback,
-						'Diagnostic',
+						'CalGeolocation',
 						'isLocationAuthorized',
 						[]);
 };
 
-/**
- * Checks if exists Wi-Fi connection.
- *
- * @param successCallback	The callback which will be called when diagnostic of Wi-Fi is successful.
- * 							This callback function have a boolean param with the diagnostic result.
- * @param errorCallback		The callback which will be called when diagnostic of Wi-Fi encounters an error.
- * 							This callback function have a string param with the error.
- */
 
-Diagnostic.prototype.isWifiEnabled = function(successCallback, errorCallback) {
-	return cordova.exec(successCallback,
-						errorCallback,
-						'Diagnostic',
-						'isWifiEnabled',
-						[]);
-};
+module.exports = new CalGeolocation();
 
-/**
- * Checks if exists camera.
- *
- * @param successCallback	The callback which will be called when diagnostic of camera is successful.
- * 							This callback function have a boolean param with the diagnostic result.
- * @param errorCallback		The callback which will be called when diagnostic of camera encounters an error.
- * 							This callback function have a string param with the error.
- */
-
-
-Diagnostic.prototype.isCameraEnabled = function(successCallback, errorCallback) {
-	return cordova.exec(successCallback,
-						errorCallback,
-						'Diagnostic',
-						'isCameraEnabled',
-						[]);
-};
-
-module.exports = new Diagnostic();
-
-// cordova.addConstructor(function() {
-// 	if(!window.plugins)
-// 		window.plugins = {};
-// 	window.plugins.diagnostic = new Diagnostic();
-// });

@@ -7,13 +7,10 @@
 
 #import <Cordova/CDV.h>
 
-@interface Diagnostic : CDVPlugin
+@interface CalGeolocation : CDVPlugin
 
 - (void) isLocationEnabled: (CDVInvokedUrlCommand*)command;
 - (void) isLocationEnabledSetting: (CDVInvokedUrlCommand*)command;
 - (void) switchToLocationSettings: (CDVInvokedUrlCommand*)command;
-- (void) isLocationAuthorized: (CDVInvokedUrlCommand*)command;
-- (void) isWifiEnabled: (CDVInvokedUrlCommand*)command;
-- (void) isCameraEnabled: (CDVInvokedUrlCommand*)command;
 
 @end
