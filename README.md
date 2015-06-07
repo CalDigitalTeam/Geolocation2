@@ -1,4 +1,4 @@
-cordova-diagnostic-plugin
+cal-geolocation-plugin
 =========================
 
-The diagnostic plugin allows you to check different device settings in your PhoneGap application
+allows to check geolocation availability
